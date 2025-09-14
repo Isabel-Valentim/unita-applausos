@@ -49,9 +49,8 @@ Propomos a criação de um **assistente de suporte inteligente** que utiliza IA 
 
 A API acessa uma **base de conhecimento dinâmica**, que evolui continuamente: sempre que não houver resposta disponível, o sistema abre um chamado, registra a solução validada e a incorpora à base.  
 
-👉 A IA também apromora o texto da resposta do chamado e incluir o artigo de forma padronizada na Base de Conhecimento.
+👉 A IA também aprimora o texto da resposta do chamado e incluir o artigo de forma padronizada na Base de Conhecimento.
 
-<img width="4597" height="593" alt="deepseek_mermaid_20250914_654df7" src="https://github.com/user-attachments/assets/db0e73ee-38bc-445e-8154-fe1a64e94ec5" />
 ## Design Mínimo do MVP
 <img width="1999" height="1967" alt="design-system-applausos" src="https://github.com/user-attachments/assets/0c4dfd7f-aa9d-44c0-981e-ecca78c67fd6" />
 
