@@ -41,7 +41,8 @@ Diante desse cenário, o problema central que queremos solucionar é:
 
 ## Nossa Solução  
 
-#### video ou imagem bonita
+### Vídeo demonstrando a solução 
+[Link no youtube:] (https://youtu.be/teJ6g_JrBWk)
 
 Propomos a criação de um **assistente de suporte inteligente** que utiliza IA para responder perguntas de colaboradores com base em uma **base de conhecimento corporativa** responsável por auxiliar colaboradores no dia a dia com mais agilidade e produtividade e abrir chamados. 
 
