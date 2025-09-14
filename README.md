@@ -74,7 +74,7 @@ Direcionamento automático para o setor correto, eliminando retrabalho e reduzin
 A IA interpreta o tom da mensagem e identifica a urgência, garantindo que problemas críticos sejam tratados primeiro.
 
 ### Acessibilidade por Áudio
-Suporte a leitura e interação por voz, promovendo inclusão e ampliando o alcance da solução. Ao incluir "responde por áudio" na pergunta, o chat ativa a funcionalidade de leitura de respostas por voz automaticamente.
+Suporte a leitura e interação por voz, promovendo inclusão e ampliando o alcance da solução
 
 - ✨ Comunicação Personalizada, Simples e Acessível 
 Permitir que cada usuário solicite suporte da forma mais rápida e intuitiva.
