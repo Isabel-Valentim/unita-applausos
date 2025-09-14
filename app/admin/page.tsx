@@ -1,3 +1,5 @@
+"use client" // Convertendo para Client Component para usar useBranding hook
+
 import { DashboardMetrics } from "@/components/dashboard-metrics"
 import { Badge } from "@/components/ui/badge"
 import { useBranding } from "@/lib/branding-context"

@@ -1,3 +1,5 @@
+"use client" // Convertendo para Client Component para usar useBranding hook
+
 import { TicketList } from "@/components/ticket-list"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Ticket, AlertCircle, Clock, CheckCircle } from "lucide-react"
