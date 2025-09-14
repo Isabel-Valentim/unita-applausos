@@ -44,6 +44,256 @@ Diante desse cenário, o problema central que queremos solucionar é:
 ### Vídeo demonstrando a solução 
 [Link no youtube:] (https://youtu.be/teJ6g_JrBWk)
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video with README</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+        }
+        
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .video-container {
+            flex: 1;
+            min-width: 300px;
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .info-container {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .info-section {
+            margin-bottom: 25px;
+        }
+        
+        .info-section h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-section p {
+            margin-bottom: 15px;
+            color: #34495e;
+        }
+        
+        .info-section ul, .info-section ol {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .info-section li {
+            margin-bottom: 8px;
+        }
+        
+        .code-block {
+            background: #2d3436;
+            color: #f5f6fa;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .tag {
+            background: #3498db;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #3498db;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>YouTube Video Embed</h1>
+            <p class="subtitle">A beautiful layout for showcasing your YouTube content</p>
+        </header>
+        
+        <div class="content">
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/teJ6g_JrBWk" 
+                            title="YouTube video player" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+            
+            <div class="info-container">
+                <div class="info-section">
+                    <h2><i class="fas fa-info-circle"></i> About This Video</h2>
+                    <p>This video demonstrates how to create an elegant YouTube video embed with a README-style layout using HTML and CSS. The design is fully responsive and will look great on all devices.</p>
+                    <p>You can use this template to showcase your own videos along with detailed information, code examples, and resources.</p>
+                </div>
+                
+                <div class="info-section">
+                    <h2><i class="fas fa-code"></i> Implementation</h2>
+                    <p>To embed a YouTube video, you can use the following code:</p>
+                    <div class="code-block">
+                        &lt;div class="video-wrapper"&gt;<br>
+                        &nbsp;&nbsp;&lt;iframe src="https://www.youtube.com/embed/VIDEO_ID" &gt;&lt;/iframe&gt;<br>
+                        &lt;/div&gt;
+                    </div>
+                    <p>Replace <strong>VIDEO_ID</strong> with your actual YouTube video ID.</p>
+                </div>
+                
+                <div class="info-section">
+                    <h2><i class="fas fa-feather-alt"></i> Features</h2>
+                    <ul>
+                        <li>Fully responsive design</li>
+                        <li>Modern gradient background</li>
+                        <li>README-style documentation layout</li>
+                        <li>Code snippet display</li>
+                        <li>Social media links</li>
+                        <li>Clean and professional appearance</li>
+                    </ul>
+                </div>
+                
+                <div class="tags">
+                    <span class="tag">YouTube</span>
+                    <span class="tag">Embed</span>
+                    <span class="tag">HTML</span>
+                    <span class="tag">CSS</span>
+                    <span class="tag">README</span>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Created with <i class="fas fa-heart" style="color: #e74c3c;"></i> by DevDesign</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
+
 Propomos a criação de um **assistente de suporte inteligente** que utiliza IA para responder perguntas de colaboradores com base em uma **base de conhecimento corporativa** responsável por auxiliar colaboradores no dia a dia com mais agilidade e produtividade e abrir chamados. 
 
 > Apenas 4% das empresas documentam seus processos de forma consistente, enquanto 50% o fazem apenas ocasionalmente, segundo pesquisa da BPTrends citada pela [Atlassian](https://www.atlassian.com/br/work-management/knowledge-sharing/documentation).
