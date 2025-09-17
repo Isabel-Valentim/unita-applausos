@@ -4,10 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Checkbox } from "@/components/ui/checkbox"
-import { ArrowLeft, Clock, MessageSquare, RefreshCw, Bell, Send, Loader2 } from "lucide-react"
+import { ArrowLeft, Clock, MessageSquare, RefreshCw, Bell } from "lucide-react"
 import Link from "next/link"
 import { ticketStore, type Ticket } from "@/lib/ticket-store"
 import { toast } from "sonner"
@@ -17,11 +14,6 @@ export default function MeusChamadosPage() {
   const [loading, setLoading] = useState(true)
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date())
   const lastUpdateRef = useRef(lastUpdate)
-  const [replyingTo, setReplyingTo] = useState<string | null>(null)
-  const [replyMessage, setReplyMessage] = useState("")
-  const [saveToKnowledge, setSaveToKnowledge] = useState(false)
-  const [knowledgeTitle, setKnowledgeTitle] = useState("")
-  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const userId = "solicitante-1"
 
@@ -35,76 +27,6 @@ export default function MeusChamadosPage() {
       toast.error("Erro ao carregar chamados")
     } finally {
       setLoading(false)
-    }
-  }
-
-  const handleReply = async (ticketId: string) => {
-    if (!replyMessage.trim()) {
-      toast.error("Digite uma mensagem para responder")
-      return
-    }
-
-    if (saveToKnowledge && !knowledgeTitle.trim()) {
-      toast.error("Digite um título para o artigo da base de conhecimento")
-      return
-    }
-
-    setIsSubmitting(true)
-
-    try {
-      let finalMessage = replyMessage
-
-      if (saveToKnowledge) {
-        const response = await fetch("/api/improve-article", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            content: replyMessage,
-            title: knowledgeTitle,
-          }),
-        })
-
-        if (response.ok) {
-          const data = await response.json()
-          finalMessage = data.improvedContent
-
-          const existingArticles = JSON.parse(localStorage.getItem("knowledge-base") || "[]")
-          const newArticle = {
-            id: Date.now().toString(),
-            title: knowledgeTitle,
-            content: finalMessage,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          }
-          existingArticles.push(newArticle)
-          localStorage.setItem("knowledge-base", JSON.stringify(existingArticles))
-
-          toast.success("Resposta melhorada pela IA e salva na base de conhecimento!")
-        } else {
-          toast.error("Erro ao melhorar o texto, mas a resposta será enviada normalmente")
-        }
-      }
-
-      ticketStore.addResponse(ticketId, {
-        message: finalMessage,
-        authorType: "solicitante",
-        authorId: userId,
-      })
-
-      setReplyMessage("")
-      setSaveToKnowledge(false)
-      setKnowledgeTitle("")
-      setReplyingTo(null)
-
-      loadTickets()
-
-      toast.success("Resposta enviada com sucesso!")
-    } catch (error) {
-      toast.error("Erro ao enviar resposta")
-    } finally {
-      setIsSubmitting(false)
     }
   }
 
@@ -132,7 +54,7 @@ export default function MeusChamadosPage() {
               "data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmGgU7k9n1unEiBC13yO/eizEIHWq+8+OWT",
             )
             audio.volume = 0.3
-            audio.play().catch(() => {})
+            audio.play().catch(() => {}) // Ignore errors if audio fails
           } catch (error) {
             // Ignore audio errors
           }
@@ -320,78 +242,6 @@ export default function MeusChamadosPage() {
                       </div>
                     </div>
                   )}
-
-                  <div className="mt-4 pt-4 border-t">
-                    {replyingTo === ticket.id ? (
-                      <div className="space-y-4">
-                        <div>
-                          <label className="text-sm font-medium mb-2 block">Sua resposta:</label>
-                          <Textarea
-                            value={replyMessage}
-                            onChange={(e) => setReplyMessage(e.target.value)}
-                            placeholder="Digite sua resposta..."
-                            className="min-h-[100px]"
-                          />
-                        </div>
-
-                        <div className="space-y-3">
-                          <div className="flex items-center space-x-2">
-                            <Checkbox
-                              id={`save-knowledge-${ticket.id}`}
-                              checked={saveToKnowledge}
-                              onCheckedChange={(checked) => setSaveToKnowledge(checked as boolean)}
-                            />
-                            <label htmlFor={`save-knowledge-${ticket.id}`} className="text-sm font-medium">
-                              Salvar como artigo na Base de Conhecimento (IA irá melhorar o texto)
-                            </label>
-                          </div>
-
-                          {saveToKnowledge && (
-                            <div>
-                              <label className="text-sm font-medium mb-2 block">Título do artigo:</label>
-                              <Input
-                                value={knowledgeTitle}
-                                onChange={(e) => setKnowledgeTitle(e.target.value)}
-                                placeholder="Ex: Como resolver problema de login"
-                              />
-                            </div>
-                          )}
-                        </div>
-
-                        <div className="flex gap-2">
-                          <Button onClick={() => handleReply(ticket.id)} disabled={isSubmitting} className="flex-1">
-                            {isSubmitting ? (
-                              <>
-                                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                                {saveToKnowledge ? "Melhorando com IA..." : "Enviando..."}
-                              </>
-                            ) : (
-                              <>
-                                <Send className="h-4 w-4 mr-2" />
-                                Enviar Resposta
-                              </>
-                            )}
-                          </Button>
-                          <Button
-                            variant="outline"
-                            onClick={() => {
-                              setReplyingTo(null)
-                              setReplyMessage("")
-                              setSaveToKnowledge(false)
-                              setKnowledgeTitle("")
-                            }}
-                          >
-                            Cancelar
-                          </Button>
-                        </div>
-                      </div>
-                    ) : (
-                      <Button variant="outline" onClick={() => setReplyingTo(ticket.id)} className="w-full">
-                        <MessageSquare className="h-4 w-4 mr-2" />
-                        Responder
-                      </Button>
-                    )}
-                  </div>
                 </CardContent>
               </Card>
             ))}
